@@ -1,0 +1,7 @@
+---
+- name: Deploy Application with Ansible
+  hosts: all
+  become_user: root
+  roles:
+    - dependencies
+    - deployment

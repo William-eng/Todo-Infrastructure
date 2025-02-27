@@ -1,0 +1,32 @@
+---
+# - name: Ensure the application directory is clean
+#   remote_user: ubuntu
+#   become: yes
+#   file:
+#     path: /home/ubuntu
+#     state: absent
+#   tags:
+#     - deployment
+
+# - name: Clone the application repository
+#   become: yes
+#   environment:
+#     TMPDIR: /tmp
+#   git:
+#     repo: 'https://github.com/William-eng/To-do-App.git'
+#     dest: /home/ubuntu/app
+#     update: yes
+#     owner: ubuntu
+#     group: ubuntu
+#     mode: '0755'
+#     recurse: yes
+
+- name: Run Docker Compose
+  become: yes
+  command: docker-compose  -f  /home/ubuntu/To-do-App/docker-compose.yml up -d
+  environment:
+    JWT_SECRET: myfancysecret
+    REDIS_HOST: redis-queue
+    REDIS_PORT: 6379
+    REDIS_CHANNEL: log_channel
+    SERVER_PORT: 8083

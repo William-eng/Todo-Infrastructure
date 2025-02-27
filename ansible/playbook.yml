@@ -1,0 +1,9 @@
+---
+- name: Deploy Application with Ansible
+  hosts: all
+  become_user: root
+  vars:
+    repo_url: "https://github.com/William-eng/To-do-App.git"
+  roles:
+    - dependencies
+    - deployment
